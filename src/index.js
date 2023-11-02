@@ -1,4 +1,4 @@
-import Notiflix from "notiflix";
+import { Notify } from "notiflix";
 import simpleLightbox from "simplelightbox";
 import axios from "axios";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -12,8 +12,10 @@ const perPage = 40;
 const url = 'https://pixabay.com/api/';
 const api = '40401726-c7a7b8e60d6c4450cbe7a420e';
 let page;
-let search = ''
-
+let search = '';
+let lightbox;
+const notifyOptions = { position: 'center-center', timeout: 10000 };
+let error
 
 //render image card
 function createMurkup(image) {
@@ -45,25 +47,20 @@ function createMurkup(image) {
 }
 
 
-
-//wrap.addEventListener('submit', getPhoto)
-
-//createMurkup(res)
-
 async function getPhoto(search ,page, perPage) {
     
         let res = await axios.get(`https://pixabay.com/api/?key=40401726-c7a7b8e60d6c4450cbe7a420e&image_type=photo&orientation=horizontal&safesearch=true&per_page=${perPage}&page=${page}&q=${search}`)
             
                 console.log(res.data)
                let data = res.data
-             return data
-              
+             return data             
      
 }
 
 //getPhoto(page, perPage)
 form.addEventListener('submit', onSearch)
 loadMore.addEventListener('click', addPages)
+loadMore.classList.add('is-hidden')
     
 function onSearch(evt) {
        
@@ -76,21 +73,23 @@ function onSearch(evt) {
     gallery.innerHTML = '';//clear gallery
     
     page = 1;
-    loadMore.classList.add('is-hidden')
+    
 
     if (search === '') {
-        alert('what are you looking for?')
-
+        Notify.info('What are you looking for?')
+        alert('!')
         return
     }
        
     getPhoto(search, page, perPage)
+        
         .then(data => {
             console.log(data.totalHits, data.hits)
             if (data.totalHits === 0) {
-                alert('nothing there')
+                nothing()
         }
-        else {
+            else {
+                
                 createMurkup(data.hits);
                 lightbox = new simpleLightbox('.gallery a', { 
                 captions: true,
@@ -102,7 +101,7 @@ function onSearch(evt) {
                 overlayOpacity: 0.4,
                 navText: ['←','→'],
                     }).refresh();
-
+                    scroll()
             }
 
             //load more page
@@ -114,19 +113,26 @@ function onSearch(evt) {
      
         
     
-        .catch(alert('no!'))
+        .catch(error => {
+            console.error(error);
+            // Handle the error here, such as displaying a user-friendly error message.
+            Notify.failure("An error occurred while fetching images.");
+        })
 }
     
 function addPages() {
+    
     getPhoto(search, page, perPage)
         .then(data => {
             console.log(data.totalHits, data.hits)
-            if (data.totalHits === 0) {
-                alert('nothing there')
+            console.log(Math.ceil(data.totalHits/perPage))
+            if (Math.ceil(data.totalHits/perPage) === page) {
+                Notify.info(`We're sorry, but you've reached the end of search results.`)
+                loadMore.classList.add('is-hidden')
             }
-            else {
+            
                 createMurkup(data.hits);
-                lightbox = new SimpleLightbox('.gallery a', {
+                lightbox =new simpleLightbox('.gallery a', {
                     captions: true,
                     captionSelector: 'img',
                     captionsData: 'alt',
@@ -136,12 +142,36 @@ function addPages() {
                     overlayOpacity: 0.4,
                     navText: ['←', '→'],
                 }).refresh();
-
-            }
+                scroll()
+            
         })
-    .catch(alert('ups'))
+     .catch(error => {
+            console.error(error);
+            // Handle the error here, such as displaying a user-friendly error message.
+            Notify.failure("An error occurred while fetching images.");
+        })
+}
+
+
+function nothing() {
+    Notify.failure("Sorry, there are no images matching your search query. Please try again.")
 }
 
 
 
+function scroll() {
+    const { height: cardHeight } = document.querySelector(".gallery").firstElementChild.getBoundingClientRect();
 
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
+}
+
+//const checkbox = document.getElementById("checkbox")
+//checkbox.addEventListener("change", () => {
+ //   document.querySelector('body').classList.toggle("dark-mode");
+//    form.classList.toggle('dark-mode')
+//    document.querySelector('button').classList.toggle('dark-mode')
+//    document.querySelector('.photo-card').classList.toggle('dark-mode')
+//})
