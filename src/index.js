@@ -1,3 +1,5 @@
+window.onload
+
 import { Notify } from "notiflix";
 import simpleLightbox from "simplelightbox";
 import axios from "axios";
@@ -15,7 +17,8 @@ let page;
 let search = '';
 let lightbox;
 const notifyOptions = { position: 'center-center', timeout: 10000 };
-let error
+
+loadMore.classList.add('is-hidden')
 
 //render image card
 function createMurkup(image) {
@@ -60,7 +63,7 @@ async function getPhoto(search ,page, perPage) {
 //getPhoto(page, perPage)
 form.addEventListener('submit', onSearch)
 loadMore.addEventListener('click', addPages)
-loadMore.classList.add('is-hidden')
+
     
 function onSearch(evt) {
        
@@ -105,9 +108,10 @@ function onSearch(evt) {
             }
 
             //load more page
+            
             if (data.totalHits > perPage) {
                 loadMore.classList.remove('is-hidden')
-                page++
+                
             }
     })
      
@@ -117,6 +121,7 @@ function onSearch(evt) {
             console.error(error);
             // Handle the error here, such as displaying a user-friendly error message.
             Notify.failure("An error occurred while fetching images.");
+            loadMore.classList.add('is-hidden')
         })
 }
     
@@ -125,7 +130,9 @@ function addPages() {
     getPhoto(search, page, perPage)
         .then(data => {
             console.log(data.totalHits, data.hits)
-            console.log(Math.ceil(data.totalHits/perPage))
+            console.log(Math.ceil(data.totalHits / perPage))
+            page++
+            console.log(page)
             if (Math.ceil(data.totalHits/perPage) === page) {
                 Notify.info(`We're sorry, but you've reached the end of search results.`)
                 loadMore.classList.add('is-hidden')
@@ -148,13 +155,15 @@ function addPages() {
      .catch(error => {
             console.error(error);
             // Handle the error here, such as displaying a user-friendly error message.
-            Notify.failure("An error occurred while fetching images.");
+         Notify.failure("An error occurred while fetching images.");
+         loadMore.classList.add('is-hidden')
         })
 }
 
 
 function nothing() {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+    loadMore.classList.add('is-hidden')
 }
 
 

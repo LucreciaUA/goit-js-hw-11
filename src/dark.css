@@ -1,17 +1,12 @@
 body {
-    background-color: #FCFFFD;
+    background-color: #686b76;
     margin: 0 auto;
     box-sizing: border-box;
     text-align: center;
     justify-content: center;
 }
 
-.gallery .dark-mode{
-background-color: #686b76;
-color: #fff;
-}
-
-a{
+a {
     text-decoration: none;
 }
 
@@ -28,39 +23,37 @@ a{
     overflow: hidden;
 }
 
-.gallery{
+.gallery {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
     justify-content: space-around;
     gap: 30px;
+    background-color: #686b76;
+        color: #fff;
 }
 
-.photo-card{
-box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-}
 
-.photo-card .dark-mode{
+
+.photo-card {
     box-shadow: rgba(255, 255, 255, 0.1) 0px 20px 25px -5px, rgba(255, 255, 255, 0.04) 0px 10px 10px -5px;
 }
 
-.info{
+.info {
     display: flex;
     justify-content: space-around;
-    color: #000;
-}
-
-.info .dark-mode{
     color: #fff
 }
 
-.info-item{
+
+
+.info-item {
     display: flex;
     flex-direction: column;
 }
 
-.search-form{
-    background-color: #64B6AC;
+.search-form {
+    background-color: #022430;
     padding: 40px 0;
     display: flex;
     align-items: center;
@@ -69,63 +62,46 @@ box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 
     margin-bottom: 10px;
 }
 
-.search-form .dark-mode{
-    background-color: #022430;
-}
 
-input{
+
+input {
     font-size: 18px;
     text-align: center;
-    border-radius: 4px;
+    background-color: #022B3A;
+        color: #fff;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
-input .dark-mode{
-    background-color: #022B3A;
-    color: #fff;
-}
 
-button{
+button {
     display: flex;
     font-size: 18px;
     border: none;
     border-radius: 4px;
-    
-    
-}
-
-button .dark-mode{
     color: #fff;
+
 }
 
-.submit{
-    background-color: #C0FDFB;
+.submit .dark-mode {
     padding: 4px 12px;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
-
-.submit .dark-mode{
     background-color: #1F7A8C;
     color: #fff;
     box-shadow: rgba(255, 255, 255, 0.17) 0px -23px 25px 0px inset, rgba(255, 255, 255, 0.15) 0px -36px 30px 0px inset, rgba(255, 255, 255, 0.1) 0px -79px 40px 0px inset, rgba(255, 255, 255, 0.06) 0px 2px 1px, rgba(255, 255, 255, 0.09) 0px 4px 2px, rgba(255, 255, 255, 0.09) 0px 8px 4px, rgba(255, 255, 255, 0.09) 0px 16px 8px, rgba(255, 255, 255, 0.09) 0px 32px 16px;
 }
 
-.holder{
+.holder {
     display: flex;
     justify-content: center;
 }
 
-.load-more{
-    background-color: #72c3b9;
-    margin: 20px 0;
-    padding: 4px 12px;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
 
-.load-more .dark-mode{
+
+.load-more .dark-mode {
     background-color: #022B3A;
     box-shadow: rgba(255, 255, 255, 0.17) 0px -23px 25px 0px inset, rgba(255, 255, 255, 0.15) 0px -36px 30px 0px inset, rgba(255, 255, 255, 0.1) 0px -79px 40px 0px inset, rgba(255, 255, 255, 0.06) 0px 2px 1px, rgba(255, 255, 255, 0.09) 0px 4px 2px, rgba(255, 255, 255, 0.09) 0px 8px 4px, rgba(255, 255, 255, 0.09) 0px 16px 8px, rgba(255, 255, 255, 0.09) 0px 32px 16px;
     color: #fff;
+        margin: 20px 0;
+            padding: 4px 12px;
 }
 
 .checkbox {
