@@ -11,7 +11,7 @@ import './style.css'
 const form = document.querySelector('.search-form');
 const loadMore = document.querySelector('.load-more')
 
-
+loadMore.classList.add('is-hidden')
 
 form.addEventListener('submit', onSearch)
 loadMore.addEventListener('click', addPages)

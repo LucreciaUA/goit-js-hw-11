@@ -20,7 +20,7 @@ const notifyOptions = { position: 'center-center', timeout: 10000 };
 export function onSearch(evt) {
        
     evt.preventDefault(); // Prevent form submission
-
+    loadMore.classList.add('is-hidden')
     search = evt.currentTarget.searchQuery.value.trim();//get search value without spaces
     
     console.log(search)
@@ -40,6 +40,7 @@ export function onSearch(evt) {
         
         .then(data => {
             console.log(data.totalHits, data.hits)
+            loadMore.classList.add('is-hidden')
             if (data.totalHits === 0) {
                 nothing()
         }
