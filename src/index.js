@@ -1,6 +1,4 @@
-window.onload
-
-import { Notify } from "notiflix";
+import {Notify} from "notiflix";
 import simpleLightbox from "simplelightbox";
 import axios from "axios";
 import "simplelightbox/dist/simple-lightbox.min.css";
@@ -126,12 +124,12 @@ function onSearch(evt) {
 }
     
 function addPages() {
-    
+    page++
     getPhoto(search, page, perPage)
         .then(data => {
             console.log(data.totalHits, data.hits)
             console.log(Math.ceil(data.totalHits / perPage))
-            page++
+            
             console.log(page)
             if (Math.ceil(data.totalHits/perPage) === page) {
                 Notify.info(`We're sorry, but you've reached the end of search results.`)
